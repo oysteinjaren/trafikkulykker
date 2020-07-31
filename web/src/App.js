@@ -1,19 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import "./App.css";
 
 function App() {
-  const [melding, setMelding] = useState("");
-
-  useEffect(() => {
-    fetch("/api/hello")
-      .then((res) => res.json())
-      .then((json) => setMelding(json.message));
-  });
-
   return (
-    <div className="App">
-      <p>Meldingen er: {melding}</p>
-    </div>
+    <Map center={[63.430515, 10.395053]} zoom={12}>
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+      />
+    </Map>
   );
 }
 
