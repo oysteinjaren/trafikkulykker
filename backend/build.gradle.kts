@@ -13,6 +13,9 @@ java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
     mavenCentral()
+    maven {
+        setUrl("https://dl.bintray.com/nvdb-vegdata/vegdata")
+    }
 }
 
 dependencies {
@@ -20,6 +23,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    api("no.vegvesen.nvdb:nvdb-read-api-v3-client:1.10.0")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
