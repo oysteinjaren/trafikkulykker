@@ -38,6 +38,7 @@ class NvdbApiUlykkerService : UlykkerService {
         var roadObjects = roadObjectResult.next()
 
         var ulykker : List<Ulykke> = roadObjects.map { Ulykke(
+                id = it.id,
                 ulykkesdato = it.startDate,
                 alvorlighetsgrad = it.hentAlvorlighetsgrad(),
                 koordinater = it.hentKoordinater())
