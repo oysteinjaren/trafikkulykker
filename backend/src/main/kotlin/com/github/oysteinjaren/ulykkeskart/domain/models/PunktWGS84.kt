@@ -1,3 +1,3 @@
 package com.github.oysteinjaren.ulykkeskart.domain.models
 
-data class PunktUTM33(val x : Int, val y : Int)
+data class PunktWGS84(val lat : Double, val lon : Double)

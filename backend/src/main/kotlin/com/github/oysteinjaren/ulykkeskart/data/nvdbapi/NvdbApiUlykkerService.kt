@@ -1,12 +1,13 @@
 package com.github.oysteinjaren.ulykkeskart.data.nvdbapi
 
 import com.github.oysteinjaren.ulykkeskart.domain.models.Alvorlighetsgrad
-import com.github.oysteinjaren.ulykkeskart.domain.models.PunktUTM33
+import com.github.oysteinjaren.ulykkeskart.domain.models.PunktWGS84
 import com.github.oysteinjaren.ulykkeskart.domain.models.Ulykke
 import com.github.oysteinjaren.ulykkeskart.domain.services.UlykkerService
 import no.vegvesen.nvdbapi.client.ClientConfiguration
 import no.vegvesen.nvdbapi.client.clients.ClientFactory
 import no.vegvesen.nvdbapi.client.clients.RoadObjectRequest
+import no.vegvesen.nvdbapi.client.model.Projection
 import no.vegvesen.nvdbapi.client.model.roadobjects.RoadObject
 import no.vegvesen.nvdbapi.client.model.roadobjects.attribute.StringEnumAttribute
 import org.springframework.stereotype.Service
@@ -29,6 +30,7 @@ class NvdbApiUlykkerService : UlykkerService {
         var roadObjectRequest = RoadObjectRequest.newBuilder()
                 .withMunicipalities(listOf(5001))
                 .withAttributeFilter("(5055>='2019-01-01')AND(5055<='2019-12-31')")
+                .withProjection(Projection.WGS84)
                 .includeAll()
                 .build()
 
@@ -58,14 +60,14 @@ class NvdbApiUlykkerService : UlykkerService {
         }
     }
 
-    private fun RoadObject.hentKoordinater() : PunktUTM33? {
+    private fun RoadObject.hentKoordinater() : PunktWGS84? {
         val wkt = this.geometry?.wkt;
         val split = wkt?.split("POINT Z(", ")")
         val koordinaterString = split?.get(1)
         val koordinater = koordinaterString?.split(' ')
-        val x = koordinater?.get(0)?.toFloat()?.toInt()
-        var y = koordinater?.get(1)?.toFloat()?.toInt()
-        return if (x != null && y != null) PunktUTM33(x, y) else null
+        val lat = koordinater?.get(0)?.toDouble()
+        var lon = koordinater?.get(1)?.toDouble()
+        return if (lat != null && lon != null) PunktWGS84(lat, lon) else null
     }
 
 }
