@@ -7,6 +7,8 @@ import com.github.oysteinjaren.ulykkeskart.domain.services.UlykkerService
 import no.vegvesen.nvdbapi.client.ClientConfiguration
 import no.vegvesen.nvdbapi.client.clients.ClientFactory
 import no.vegvesen.nvdbapi.client.clients.RoadObjectRequest
+import no.vegvesen.nvdbapi.client.model.roadobjects.RoadObject
+import no.vegvesen.nvdbapi.client.model.roadobjects.attribute.StringEnumAttribute
 import org.springframework.stereotype.Service
 
 @Service
@@ -35,13 +37,25 @@ class NvdbApiUlykkerService : UlykkerService {
 
         var ulykker : List<Ulykke> = roadObjects.map { Ulykke(
                 ulykkesdato = it.startDate,
-                alvorlighetsgrad = Alvorlighetsgrad.USKADET, //TODO: Map alvorlighetsgrad fra roadObject
+                alvorlighetsgrad = it.hentAlvorlighetsgrad(),
                 koordinater = PunktUTM33(123, 456)) //TODO: Map koordinater fra roadObject
         }
 
         factory.close();
 
         return ulykker
+    }
+
+    private fun RoadObject.hentAlvorlighetsgrad() : Alvorlighetsgrad {
+        val alvorlighetsgradAttribute = this.getAttribute(5074) as StringEnumAttribute
+        return when(alvorlighetsgradAttribute.enumId) {
+            6431 -> Alvorlighetsgrad.USKADET
+            6430 -> Alvorlighetsgrad.LETTERESKADET
+            6429 -> Alvorlighetsgrad.ALVORLIGSKADET
+            6428 -> Alvorlighetsgrad.MEGETALVORLIGSKADET
+            6427 -> Alvorlighetsgrad.DREPT
+            else -> Alvorlighetsgrad.IKKEREGISTRERT
+        }
     }
 
 }

@@ -5,5 +5,6 @@ enum class Alvorlighetsgrad {
     LETTERESKADET,
     ALVORLIGSKADET,
     MEGETALVORLIGSKADET,
-    DREPT
+    DREPT,
+    IKKEREGISTRERT
 }
