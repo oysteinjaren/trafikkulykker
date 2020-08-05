@@ -38,7 +38,7 @@ class NvdbApiUlykkerService : UlykkerService {
         var ulykker : List<Ulykke> = roadObjects.map { Ulykke(
                 ulykkesdato = it.startDate,
                 alvorlighetsgrad = it.hentAlvorlighetsgrad(),
-                koordinater = PunktUTM33(123, 456)) //TODO: Map koordinater fra roadObject
+                koordinater = it.hentKoordinater())
         }
 
         factory.close();
@@ -56,6 +56,16 @@ class NvdbApiUlykkerService : UlykkerService {
             6427 -> Alvorlighetsgrad.DREPT
             else -> Alvorlighetsgrad.IKKEREGISTRERT
         }
+    }
+
+    private fun RoadObject.hentKoordinater() : PunktUTM33? {
+        val wkt = this.geometry?.wkt;
+        val split = wkt?.split("POINT Z(", ")")
+        val koordinaterString = split?.get(1)
+        val koordinater = koordinaterString?.split(' ')
+        val x = koordinater?.get(0)?.toFloat()?.toInt()
+        var y = koordinater?.get(1)?.toFloat()?.toInt()
+        return if (x != null && y != null) PunktUTM33(x, y) else null
     }
 
 }

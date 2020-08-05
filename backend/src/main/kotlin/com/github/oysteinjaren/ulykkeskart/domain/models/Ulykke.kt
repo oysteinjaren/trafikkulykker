@@ -5,4 +5,4 @@ import java.time.LocalDate
 data class Ulykke (
         val ulykkesdato : LocalDate,
         val alvorlighetsgrad: Alvorlighetsgrad,
-        val koordinater : PunktUTM33)
+        val koordinater : PunktUTM33?)
