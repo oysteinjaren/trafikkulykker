@@ -37,6 +37,8 @@ function App() {
     }
     return new Icon({
       iconUrl: sti,
+      iconSize: [25, 41],
+      iconAnchor: [12, 40],
     });
   }
 
