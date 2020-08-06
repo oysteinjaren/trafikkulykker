@@ -10,6 +10,8 @@ function App() {
   const { data, error } = useSwr(ulykkerUrl, { fetcher });
   const ulykker = data && !error ? data : [];
 
+  const [aktivUlykke, setAktivUlykke] = React.useState(null);
+
   return (
     <Map center={[63.430515, 10.395053]} zoom={12}>
       <TileLayer
@@ -23,8 +25,24 @@ function App() {
           <Marker
             key={ulykke.id}
             position={[ulykke.koordinater.lat, ulykke.koordinater.lon]}
+            onclick={() => {
+              setAktivUlykke(ulykke);
+            }}
           />
         ))}
+      {aktivUlykke && (
+        <Popup
+          position={[aktivUlykke.koordinater.lat, aktivUlykke.koordinater.lon]}
+          onClose={() => {
+            setAktivUlykke(null);
+          }}
+        >
+          <div>
+            <h2>{aktivUlykke.ulykkesdato}</h2>
+            <p>{aktivUlykke.alvorlighetsgrad}</p>
+          </div>
+        </Popup>
+      )}
     </Map>
   );
 }
