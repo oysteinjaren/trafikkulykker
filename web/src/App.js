@@ -47,18 +47,19 @@ function App() {
         attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
       />
 
-      {ulykker
-        .filter((ulykke) => ulykke.koordinater != null)
-        .map((ulykke) => (
-          <Marker
-            key={ulykke.id}
-            position={[ulykke.koordinater.lat, ulykke.koordinater.lon]}
-            icon={hentUlykkeIkon(ulykke.alvorlighetsgrad)}
-            onclick={() => {
-              setAktivUlykke(ulykke);
-            }}
-          />
-        ))}
+      {ulykker &&
+        ulykker
+          .filter((ulykke) => ulykke.koordinater != null)
+          .map((ulykke) => (
+            <Marker
+              key={ulykke.id}
+              position={[ulykke.koordinater.lat, ulykke.koordinater.lon]}
+              icon={hentUlykkeIkon(ulykke.alvorlighetsgrad)}
+              onclick={() => {
+                setAktivUlykke(ulykke);
+              }}
+            />
+          ))}
       {aktivUlykke && (
         <Popup
           position={[aktivUlykke.koordinater.lat, aktivUlykke.koordinater.lon]}
