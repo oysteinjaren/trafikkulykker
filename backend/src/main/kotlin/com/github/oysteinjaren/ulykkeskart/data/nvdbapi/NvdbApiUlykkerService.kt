@@ -28,7 +28,7 @@ class NvdbApiUlykkerService : UlykkerService {
         var client = factory.createRoadObjectClient()
 
         var roadObjectRequest = RoadObjectRequest.newBuilder()
-                .withMunicipalities(listOf(5001))
+                .withBbox("10.385846, 63.426143, 10.406682, 63.434819")
                 .withAttributeFilter("(5055>='2019-01-01')AND(5055<='2019-12-31')")
                 .withProjection(Projection.WGS84)
                 .includeAll()
@@ -63,7 +63,7 @@ class NvdbApiUlykkerService : UlykkerService {
 
     private fun RoadObject.hentKoordinater() : PunktWGS84? {
         val wkt = this.geometry?.wkt;
-        val split = wkt?.split("POINT Z(", ")")
+        val split = wkt?.split('(', ')')
         val koordinaterString = split?.get(1)
         val koordinater = koordinaterString?.split(' ')
         val lat = koordinater?.get(0)?.toDouble()
