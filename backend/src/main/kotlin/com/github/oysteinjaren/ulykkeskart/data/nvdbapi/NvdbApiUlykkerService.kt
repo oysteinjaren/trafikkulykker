@@ -1,6 +1,7 @@
 package com.github.oysteinjaren.ulykkeskart.data.nvdbapi
 
 import com.github.oysteinjaren.ulykkeskart.domain.models.Alvorlighetsgrad
+import com.github.oysteinjaren.ulykkeskart.domain.models.BoundingBoxWGS84
 import com.github.oysteinjaren.ulykkeskart.domain.models.PunktWGS84
 import com.github.oysteinjaren.ulykkeskart.domain.models.Ulykke
 import com.github.oysteinjaren.ulykkeskart.domain.services.UlykkerService
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Service
 @Service
 class NvdbApiUlykkerService : UlykkerService {
 
-    override fun hentUlykker(): List<Ulykke> {
+    override fun hentUlykker(boundingBoxWGS84: BoundingBoxWGS84): List<Ulykke> {
 
         var clientConfig = ClientConfiguration.ClientConfigurationBuilder.builder()
                 .withReadTimeout(5000)
@@ -28,7 +29,7 @@ class NvdbApiUlykkerService : UlykkerService {
         var client = factory.createRoadObjectClient()
 
         var roadObjectRequest = RoadObjectRequest.newBuilder()
-                .withBbox("10.385846, 63.426143, 10.406682, 63.434819")
+                .withBbox("${boundingBoxWGS84.vest}, ${boundingBoxWGS84.sør}, ${boundingBoxWGS84.øst}, ${boundingBoxWGS84.nord}")
                 .withAttributeFilter("(5055>='2019-01-01')AND(5055<='2019-12-31')")
                 .withProjection(Projection.WGS84)
                 .includeAll()

@@ -1,10 +1,12 @@
 import React from "react";
-import { Marker, Popup } from "react-leaflet";
+import { Marker, Popup, useLeaflet } from "react-leaflet";
 import { Icon } from "leaflet";
 import useSwr from "swr";
 
 function Ulykker() {
-  const ulykkerUrl = "/api/ulykker";
+  const { map } = useLeaflet();
+  const bounds = map.getBounds();
+  const ulykkerUrl = `/api/ulykker?vest=${bounds._southWest.lng}&soer=${bounds._southWest.lat}&oest=${bounds._northEast.lng}&nord=${bounds._northEast.lat}`;
   const fetcher = (...args) =>
     fetch(...args).then((response) => response.json());
   const { data, error } = useSwr(ulykkerUrl, { fetcher });
