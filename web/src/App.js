@@ -1,5 +1,5 @@
 import React from "react";
-import { Map, Marker, Popup, TileLayer } from "react-leaflet";
+import { Map, TileLayer } from "react-leaflet";
 import "./App.css";
 
 import Ulykker from "./components/Ulykker";
