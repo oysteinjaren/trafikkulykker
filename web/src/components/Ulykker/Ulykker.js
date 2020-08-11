@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Marker, Popup, useLeaflet } from "react-leaflet";
+import MarkerClusterGroup from "react-leaflet-markercluster";
 import { Icon } from "leaflet";
 import axios from "axios";
 
@@ -33,7 +34,7 @@ function Ulykker(props) {
       const response = await axios.get(ulykkerUrl, {
         params: avgrensningsboks,
       });
-      console.log(`Hentet ${response.data.length}`);
+      console.log(`Hentet ${response.data.length} ulykker`);
       setUlykker(response.data);
     };
     if (måLasteData) {
@@ -74,7 +75,7 @@ function Ulykker(props) {
   }
 
   return (
-    <div>
+    <MarkerClusterGroup>
       {ulykker &&
         ulykker
           .filter((ulykke) => ulykke.koordinater != null)
@@ -101,7 +102,7 @@ function Ulykker(props) {
           </div>
         </Popup>
       )}
-    </div>
+    </MarkerClusterGroup>
   );
 }
 
