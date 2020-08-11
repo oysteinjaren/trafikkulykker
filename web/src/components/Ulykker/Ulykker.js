@@ -7,12 +7,7 @@ function Ulykker() {
   const { map } = useLeaflet();
   const bounds = map.getBounds();
 
-  const [avgrensningsboks, setAvgrensningsboks] = useState({
-    vest: bounds._southWest.lng,
-    soer: bounds._southWest.lat,
-    oest: bounds._northEast.lng,
-    nord: bounds._northEast.lat,
-  });
+  const [avgrensningsboks, setAvgrensningsboks] = useState({});
 
   if (
     bounds._southWest.lng !== avgrensningsboks.vest ||
