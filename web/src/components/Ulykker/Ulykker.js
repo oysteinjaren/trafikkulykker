@@ -1,16 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Marker, Popup, useLeaflet } from "react-leaflet";
 import { Icon } from "leaflet";
-import useSwr from "swr";
+import axios from "axios";
 
 function Ulykker() {
   const { map } = useLeaflet();
   const bounds = map.getBounds();
-  const ulykkerUrl = `/api/ulykker?vest=${bounds._southWest.lng}&soer=${bounds._southWest.lat}&oest=${bounds._northEast.lng}&nord=${bounds._northEast.lat}`;
-  const fetcher = (...args) =>
-    fetch(...args).then((response) => response.json());
-  const { data, error } = useSwr(ulykkerUrl, { fetcher });
-  const ulykker = data && !error ? data : [];
+
+  const [avgrensningsboks, setAvgrensningsboks] = useState({
+    vest: bounds._southWest.lng,
+    soer: bounds._southWest.lat,
+    oest: bounds._northEast.lng,
+    nord: bounds._northEast.lat,
+  });
+
+  if (
+    bounds._southWest.lng !== avgrensningsboks.vest ||
+    bounds._southWest.lat !== avgrensningsboks.soer ||
+    bounds._northEast.lng !== avgrensningsboks.oest ||
+    bounds._northEast.lat !== avgrensningsboks.nord
+  ) {
+    setAvgrensningsboks({
+      vest: bounds._southWest.lng,
+      soer: bounds._southWest.lat,
+      oest: bounds._northEast.lng,
+      nord: bounds._northEast.lat,
+    });
+  }
+  const [ulykker, setUlykker] = useState([]);
+
+  const ulykkerUrl = "/api/ulykker";
+  useEffect(() => {
+    const hentUlykker = async () => {
+      const response = await axios.get(ulykkerUrl, {
+        params: avgrensningsboks,
+      });
+      setUlykker(response.data);
+    };
+    hentUlykker();
+  }, [avgrensningsboks]);
+
   const [aktivUlykke, setAktivUlykke] = React.useState(null);
 
   function hentUlykkeIkon(alvorlighetsgrad) {
