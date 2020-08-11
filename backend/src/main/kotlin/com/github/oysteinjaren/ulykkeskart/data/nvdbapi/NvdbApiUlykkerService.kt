@@ -36,7 +36,10 @@ class NvdbApiUlykkerService : UlykkerService {
                 .build()
 
         var roadObjectResult = client.getRoadObjects(570, roadObjectRequest)
-        var roadObjects = roadObjectResult.next()
+        var roadObjects = mutableListOf<RoadObject>()
+        while (roadObjectResult.hasNext()) {
+            roadObjects.addAll(roadObjectResult.next())
+        }
 
         var ulykker : List<Ulykke> = roadObjects.map { Ulykke(
                 id = it.id,

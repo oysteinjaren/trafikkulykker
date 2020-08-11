@@ -33,6 +33,7 @@ function Ulykker(props) {
       const response = await axios.get(ulykkerUrl, {
         params: avgrensningsboks,
       });
+      console.log(`Hentet ${response.data.length}`);
       setUlykker(response.data);
     };
     if (måLasteData) {
