@@ -3,7 +3,7 @@ import { Marker, Popup, useLeaflet } from "react-leaflet";
 import { Icon } from "leaflet";
 import axios from "axios";
 
-function Ulykker() {
+function Ulykker(props) {
   const { map } = useLeaflet();
   const bounds = map.getBounds();
 
@@ -24,6 +24,9 @@ function Ulykker() {
   }
   const [ulykker, setUlykker] = useState([]);
 
+  const måLasteData = props.måLasteData;
+  const nullstillMåLasteData = props.nullstillMåLasteData;
+
   const ulykkerUrl = "/api/ulykker";
   useEffect(() => {
     const hentUlykker = async () => {
@@ -32,8 +35,11 @@ function Ulykker() {
       });
       setUlykker(response.data);
     };
-    hentUlykker();
-  }, [avgrensningsboks]);
+    if (måLasteData) {
+      hentUlykker();
+      nullstillMåLasteData();
+    }
+  }, [avgrensningsboks, måLasteData, nullstillMåLasteData]);
 
   const [aktivUlykke, setAktivUlykke] = React.useState(null);
 
