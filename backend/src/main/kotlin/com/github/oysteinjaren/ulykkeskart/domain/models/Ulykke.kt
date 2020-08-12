@@ -7,5 +7,6 @@ data class Ulykke (
         val ulykkesdato : LocalDate,
         val uhellKategori : String,
         val ulykkeskode : String,
-        val alvorlighetsgrad: Alvorlighetsgrad,
+        val alvorlighetsgrad : Alvorlighetsgrad,
+        val antallEnheter : Int,
         val koordinater : PunktWGS84?)

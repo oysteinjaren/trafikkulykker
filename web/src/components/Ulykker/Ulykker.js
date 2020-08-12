@@ -119,6 +119,10 @@ function Ulykker(props) {
             </h2>
             <h3>{aktivUlykke.ulykkeskode}</h3>
 
+            <b>Antall enheter: </b>
+            {aktivUlykke.antallEnheter}
+            <br />
+
             <b>Alvorlighetsgrad: </b>
             {alvorlighetsgradBeskrivelse(aktivUlykke.alvorlighetsgrad)}
             <br />

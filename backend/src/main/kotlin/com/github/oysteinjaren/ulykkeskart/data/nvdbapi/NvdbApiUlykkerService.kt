@@ -10,6 +10,7 @@ import no.vegvesen.nvdbapi.client.clients.ClientFactory
 import no.vegvesen.nvdbapi.client.clients.RoadObjectRequest
 import no.vegvesen.nvdbapi.client.model.Projection
 import no.vegvesen.nvdbapi.client.model.roadobjects.RoadObject
+import no.vegvesen.nvdbapi.client.model.roadobjects.attribute.IntegerAttribute
 import no.vegvesen.nvdbapi.client.model.roadobjects.attribute.StringEnumAttribute
 import org.springframework.stereotype.Service
 
@@ -47,6 +48,7 @@ class NvdbApiUlykkerService : UlykkerService {
                 uhellKategori = it.hentUhellKategori(),
                 ulykkeskode = it.hentUlykkeskode(),
                 alvorlighetsgrad = it.hentAlvorlighetsgrad(),
+                antallEnheter = it.hentAntallEnheter(),
                 koordinater = it.hentKoordinater())
         }
 
@@ -85,5 +87,10 @@ class NvdbApiUlykkerService : UlykkerService {
     private fun RoadObject.hentUlykkeskode() : String {
         val ulykkeskodeAttribute = this.getAttribute(5066) as StringEnumAttribute
         return ulykkeskodeAttribute.value
+    }
+
+    private fun RoadObject.hentAntallEnheter() : Int {
+        val antallEnheterAttribute = this.getAttribute(5069) as IntegerAttribute
+        return antallEnheterAttribute.value
     }
 }
