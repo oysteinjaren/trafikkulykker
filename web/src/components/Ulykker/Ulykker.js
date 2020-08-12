@@ -12,22 +12,22 @@ function Ulykker(props) {
 
   if (
     bounds._southWest.lng !== avgrensningsboks.vest ||
-    bounds._southWest.lat !== avgrensningsboks.soer ||
-    bounds._northEast.lng !== avgrensningsboks.oest ||
+    bounds._southWest.lat !== avgrensningsboks.sør ||
+    bounds._northEast.lng !== avgrensningsboks.øst ||
     bounds._northEast.lat !== avgrensningsboks.nord
   ) {
     setAvgrensningsboks({
       vest: bounds._southWest.lng,
-      soer: bounds._southWest.lat,
-      oest: bounds._northEast.lng,
+      sør: bounds._southWest.lat,
+      øst: bounds._northEast.lng,
       nord: bounds._northEast.lat,
     });
   }
-  const [ulykker, setUlykker] = useState([]);
 
   const måLasteData = props.måLasteData;
   const nullstillMåLasteData = props.nullstillMåLasteData;
 
+  const [ulykker, setUlykker] = useState([]);
   const ulykkerUrl = "/api/ulykker";
   useEffect(() => {
     const hentUlykker = async () => {

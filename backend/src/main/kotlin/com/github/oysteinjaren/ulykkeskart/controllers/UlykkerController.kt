@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RestController
 class UlykkerController(val ulykkerService : UlykkerService) {
 
     @GetMapping("/api/ulykker", produces = ["application/json"])
-    fun hentUlykker(@RequestParam vest : Double, @RequestParam soer : Double, @RequestParam oest : Double, @RequestParam nord : Double) : List<Ulykke> {
+    fun hentUlykker(@RequestParam vest : Double, @RequestParam sør : Double, @RequestParam øst : Double, @RequestParam nord : Double) : List<Ulykke> {
         return ulykkerService.hentUlykker(BoundingBoxWGS84(
                 vest = vest,
-                sør = soer,
-                øst = oest,
+                sør = sør,
+                øst = øst,
                 nord = nord
         ))
     }
