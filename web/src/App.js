@@ -16,8 +16,8 @@ function App() {
       }}
     >
       <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+        url="https://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=norges_grunnkart&zoom={z}&x={x}&y={y}"
+        attribution="<a href='https://www.kartverket.no/'>Kartverket</a>"
       />
       <Ulykker
         måLasteData={måLasteData}
