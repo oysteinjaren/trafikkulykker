@@ -44,6 +44,8 @@ class NvdbApiUlykkerService : UlykkerService {
         var ulykker : List<Ulykke> = roadObjects.map { Ulykke(
                 id = it.id,
                 ulykkesdato = it.startDate,
+                uhellKategori = it.hentUhellKategori(),
+                ulykkeskode = it.hentUlykkeskode(),
                 alvorlighetsgrad = it.hentAlvorlighetsgrad(),
                 koordinater = it.hentKoordinater())
         }
@@ -75,4 +77,13 @@ class NvdbApiUlykkerService : UlykkerService {
         return if (lat != null && lon != null) PunktWGS84(lat, lon) else null
     }
 
+    private fun RoadObject.hentUhellKategori() : String {
+        val uhellKategoriAttribute = this.getAttribute(5065) as StringEnumAttribute
+        return uhellKategoriAttribute.value
+    }
+
+    private fun RoadObject.hentUlykkeskode() : String {
+        val ulykkeskodeAttribute = this.getAttribute(5066) as StringEnumAttribute
+        return ulykkeskodeAttribute.value
+    }
 }

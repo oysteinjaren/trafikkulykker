@@ -74,6 +74,23 @@ function Ulykker(props) {
     });
   }
 
+  function alvorlighetsgradBeskrivelse(alvorlighetsgrad) {
+    switch (alvorlighetsgrad) {
+      case "USKADET":
+        return "Uskadd";
+      case "LETTERESKADET":
+        return "Lettere skadd";
+      case "ALVORLIGSKADET":
+        return "Alvorlig skadd";
+      case "MEGETALVORLIGSKADET":
+        return "Meget alvorlig skadd";
+      case "DREPT":
+        return "Drept";
+      default:
+        return "Ikke registrert";
+    }
+  }
+
   return (
     <MarkerClusterGroup>
       {ulykker &&
@@ -97,8 +114,14 @@ function Ulykker(props) {
           }}
         >
           <div>
-            <h2>{aktivUlykke.ulykkesdato}</h2>
-            <p>{aktivUlykke.alvorlighetsgrad}</p>
+            <h2>
+              {aktivUlykke.uhellKategori} ({aktivUlykke.ulykkesdato})
+            </h2>
+            <h3>{aktivUlykke.ulykkeskode}</h3>
+
+            <b>Alvorlighetsgrad: </b>
+            {alvorlighetsgradBeskrivelse(aktivUlykke.alvorlighetsgrad)}
+            <br />
           </div>
         </Popup>
       )}
