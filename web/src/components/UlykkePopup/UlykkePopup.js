@@ -48,6 +48,7 @@ function UlykkePopup(props) {
     <Popup
       position={[aktivUlykke.koordinater.lat, aktivUlykke.koordinater.lon]}
       onClose={onClose}
+      autoPan={false}
     >
       <h2>
         {aktivUlykke.uhellKategori} ({aktivUlykke.ulykkesdato})
