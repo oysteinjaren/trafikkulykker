@@ -83,6 +83,9 @@ function UlykkePopup(props) {
         </>
       )}
       {aktivUlykke.alvorlighetsgrad === "USKADET" && <span>Ingen skadde</span>}
+      {aktivUlykke.alvorlighetsgrad === "IKKEREGISTRERT" && (
+        <span>Alvorlighetsgrad ikke registrert</span>
+      )}
     </Popup>
   );
 }
