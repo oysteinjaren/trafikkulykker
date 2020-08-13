@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Marker, Popup, useLeaflet } from "react-leaflet";
+import { Marker, useLeaflet } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import { Icon } from "leaflet";
 import axios from "axios";
+import UlykkePopup from "../UlykkePopup";
 
 function Ulykker(props) {
   const { map } = useLeaflet();
@@ -74,23 +75,6 @@ function Ulykker(props) {
     });
   }
 
-  function alvorlighetsgradBeskrivelse(alvorlighetsgrad) {
-    switch (alvorlighetsgrad) {
-      case "USKADET":
-        return "Uskadd";
-      case "LETTERESKADET":
-        return "Lettere skadd";
-      case "ALVORLIGSKADET":
-        return "Alvorlig skadd";
-      case "MEGETALVORLIGSKADET":
-        return "Meget alvorlig skadd";
-      case "DREPT":
-        return "Drept";
-      default:
-        return "Ikke registrert";
-    }
-  }
-
   return (
     <MarkerClusterGroup>
       {ulykker &&
@@ -107,27 +91,10 @@ function Ulykker(props) {
             />
           ))}
       {aktivUlykke && (
-        <Popup
-          position={[aktivUlykke.koordinater.lat, aktivUlykke.koordinater.lon]}
-          onClose={() => {
-            setAktivUlykke(null);
-          }}
-        >
-          <div>
-            <h2>
-              {aktivUlykke.uhellKategori} ({aktivUlykke.ulykkesdato})
-            </h2>
-            <h3>{aktivUlykke.ulykkeskode}</h3>
-
-            <b>Antall enheter: </b>
-            {aktivUlykke.antallEnheter}
-            <br />
-
-            <b>Alvorlighetsgrad: </b>
-            {alvorlighetsgradBeskrivelse(aktivUlykke.alvorlighetsgrad)}
-            <br />
-          </div>
-        </Popup>
+        <UlykkePopup
+          aktivUlykke={aktivUlykke}
+          onClose={() => setAktivUlykke(null)}
+        ></UlykkePopup>
       )}
     </MarkerClusterGroup>
   );
