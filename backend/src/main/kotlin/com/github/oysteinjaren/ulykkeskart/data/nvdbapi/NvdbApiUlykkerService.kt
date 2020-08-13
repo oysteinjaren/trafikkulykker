@@ -49,6 +49,10 @@ class NvdbApiUlykkerService : UlykkerService {
                 ulykkeskode = it.hentUlykkeskode(),
                 alvorlighetsgrad = it.hentAlvorlighetsgrad(),
                 antallEnheter = it.hentAntallEnheter(),
+                antallDrepte = it.hentAntallDrepte(),
+                antallMegetAlvorligSkadde = it.hentAntallMegetAlvorligSkadde(),
+                antallAlvorligSkadde = it.hentAntallAlvorligSkadde(),
+                antallLettereSkadde = it.hentAntallLettereSkadde(),
                 koordinater = it.hentKoordinater())
         }
 
@@ -89,8 +93,15 @@ class NvdbApiUlykkerService : UlykkerService {
         return ulykkeskodeAttribute.value
     }
 
-    private fun RoadObject.hentAntallEnheter() : Int {
-        val antallEnheterAttribute = this.getAttribute(5069) as IntegerAttribute
-        return antallEnheterAttribute.value
+    private fun RoadObject.hentAntallEnheter() : Int = hentIntegerAttribute(5069)
+    private fun RoadObject.hentAntallDrepte() : Int = hentIntegerAttribute(5070)
+    private fun RoadObject.hentAntallMegetAlvorligSkadde() : Int = hentIntegerAttribute(5071)
+    private fun RoadObject.hentAntallAlvorligSkadde() : Int = hentIntegerAttribute(5072)
+    private fun RoadObject.hentAntallLettereSkadde() : Int = hentIntegerAttribute(5073)
+
+
+    private fun RoadObject.hentIntegerAttribute(attributeTypeId : Int) : Int {
+        val attribute = this.getAttribute(attributeTypeId) as IntegerAttribute
+        return attribute.value;
     }
 }
