@@ -5,28 +5,16 @@ import { useLeafletBounds } from "use-leaflet";
 import { Icon } from "leaflet";
 import axios from "axios";
 import UlykkePopup from "../UlykkePopup";
+import hentUlykker from "./hentUlykker";
 
 function Ulykker() {
   const [[sør, vest], [nord, øst]] = useLeafletBounds();
 
   const [ulykker, setUlykker] = useState([]);
-  const ulykkerUrl = "/api/ulykker";
   const [aktivUlykke, setAktivUlykke] = React.useState(null);
 
   useEffect(() => {
-    const hentUlykker = async () => {
-      const response = await axios.get(ulykkerUrl, {
-        params: {
-          vest: vest,
-          sør: sør,
-          øst: øst,
-          nord: nord,
-        },
-      });
-      console.log(`Hentet ${response.data.length} ulykker`);
-      setUlykker(response.data.filter((ulykke) => ulykke.koordinater != null));
-    };
-    hentUlykker();
+    hentUlykker(vest, sør, øst, nord);
   }, [vest, sør, øst, nord]);
 
   function hentUlykkeIkon(alvorlighetsgrad) {
