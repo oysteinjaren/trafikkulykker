@@ -56,7 +56,7 @@ const hentUlykker = async (vest, sør, øst, nord) => {
 
     returnerteUlykker = returnerteUlykker.concat(response.data.objekter);
 
-    if (response.data.metadata.antall > response.data.metadata.returnert) {
+    if (start !== response.data.metadata.neste.start) {
       start = response.data.metadata.neste.start;
     } else {
       hentFlere = false;
