@@ -2,6 +2,13 @@ import axios from "axios";
 
 const ulykkerUrl = "https://nvdbapiles-v3.atlas.vegvesen.no/vegobjekter/570";
 
+const finnAlvorlighetsgrad = (ulykke) => {
+  const alvorlighetsgrad = ulykke?.egenskaper?.find(
+    (egenskap) => egenskap.id === 5074
+  );
+  return alvorlighetsgrad?.verdi;
+};
+
 const hentUlykker = async (vest, sør, øst, nord) => {
   let returnerteUlykker = [];
   let hentFlere = true;
@@ -45,9 +52,11 @@ const hentUlykker = async (vest, sør, øst, nord) => {
       lat: parseFloat(koordinaterStrings[0]),
       lon: parseFloat(koordinaterStrings[1]),
     };
+
     return {
       id: ulykke.id,
       koordinater: koordinater,
+      alvorlighetsgrad: finnAlvorlighetsgrad(ulykke),
     };
   });
 };

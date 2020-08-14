@@ -23,19 +23,19 @@ function Ulykker() {
   function hentUlykkeIkon(alvorlighetsgrad) {
     var sti = "";
     switch (alvorlighetsgrad) {
-      case "USKADET":
+      case "Uskadd":
         sti = "/images/marker-icon-green.png";
         break;
-      case "LETTERESKADET":
+      case "Lettere skadd":
         sti = "/images/marker-icon-yellow.png";
         break;
-      case "ALVORLIGSKADET":
+      case "Alvorlig skadd":
         sti = "/images/marker-icon-orange.png";
         break;
-      case "MEGETALVORLIGSKADET":
+      case "Meget alvorlig skadd":
         sti = "/images/marker-icon-red.png";
         break;
-      case "DREPT":
+      case "Drept":
         sti = "/images/marker-icon-black.png";
         break;
       default:
