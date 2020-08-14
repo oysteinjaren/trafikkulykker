@@ -23,22 +23,22 @@ function Ulykker() {
     var sti = "";
     switch (alvorlighetsgrad) {
       case "Uskadd":
-        sti = "/images/marker-icon-green.png";
+        sti = "images/marker-icon-green.png";
         break;
       case "Lettere skadd":
-        sti = "/images/marker-icon-yellow.png";
+        sti = "images/marker-icon-yellow.png";
         break;
       case "Alvorlig skadd":
-        sti = "/images/marker-icon-orange.png";
+        sti = "images/marker-icon-orange.png";
         break;
       case "Meget alvorlig skadd":
-        sti = "/images/marker-icon-red.png";
+        sti = "images/marker-icon-red.png";
         break;
       case "Drept":
-        sti = "/images/marker-icon-black.png";
+        sti = "images/marker-icon-black.png";
         break;
       default:
-        sti = "/images/marker-icon-gray.png";
+        sti = "images/marker-icon-gray.png";
         break;
     }
     return new Icon({
