@@ -5,23 +5,6 @@ function UlykkePopup(props) {
   const aktivUlykke = props.aktivUlykke;
   const onClose = props.onClose;
 
-  function alvorlighetsgradBeskrivelse(alvorlighetsgrad) {
-    switch (alvorlighetsgrad) {
-      case "USKADET":
-        return "Uskadd";
-      case "LETTERESKADET":
-        return "Lettere skadd";
-      case "ALVORLIGSKADET":
-        return "Alvorlig skadd";
-      case "MEGETALVORLIGSKADET":
-        return "Meget alvorlig skadd";
-      case "DREPT":
-        return "Drept";
-      default:
-        return "Ikke registrert";
-    }
-  }
-
   function involverteEnheter(antall) {
     return antall === 1 ? "1 involvert enhet" : `${antall} involverte enheter`;
   }

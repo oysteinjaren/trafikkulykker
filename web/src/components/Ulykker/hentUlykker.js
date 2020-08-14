@@ -14,12 +14,22 @@ const finnKoordinater = (ulykke) => {
   };
 };
 
-const finnAlvorlighetsgrad = (ulykke) => {
-  const alvorlighetsgrad = ulykke?.egenskaper?.find(
-    (egenskap) => egenskap.id === 5074
+const finnEgenskap = (ulykke, egenskapTypeId) => {
+  const antall = ulykke?.egenskaper?.find(
+    (egenskap) => egenskap.id === egenskapTypeId
   );
-  return alvorlighetsgrad?.verdi;
+  return antall?.verdi;
 };
+
+const finnUlykkesdato = (ulykke) => finnEgenskap(ulykke, 5055);
+const finnUhellKategori = (ulykke) => finnEgenskap(ulykke, 5065);
+const finnUlykkeskode = (ulykke) => finnEgenskap(ulykke, 5066);
+const finnAntallEnheter = (ulykke) => finnEgenskap(ulykke, 5069);
+const finnAntallDrepte = (ulykke) => finnEgenskap(ulykke, 5070);
+const finnAntallMegetAlvorligSkadde = (ulykke) => finnEgenskap(ulykke, 5071);
+const finnAntallAlvorligSkadde = (ulykke) => finnEgenskap(ulykke, 5072);
+const finnAntallLettereSkadde = (ulykke) => finnEgenskap(ulykke, 5073);
+const finnAlvorlighetsgrad = (ulykke) => finnEgenskap(ulykke, 5074);
 
 const hentUlykker = async (vest, sør, øst, nord) => {
   let returnerteUlykker = [];
@@ -60,6 +70,14 @@ const hentUlykker = async (vest, sør, øst, nord) => {
     return {
       id: ulykke.id,
       koordinater: finnKoordinater(ulykke),
+      ulykkesdato: finnUlykkesdato(ulykke),
+      uhellKategori: finnUhellKategori(ulykke),
+      ulykkeskode: finnUlykkeskode(ulykke),
+      antallEnheter: finnAntallEnheter(ulykke),
+      antallDrepte: finnAntallDrepte(ulykke),
+      antallMegetAlvorligSkadde: finnAntallMegetAlvorligSkadde(ulykke),
+      antallAlvorligSkadde: finnAntallAlvorligSkadde(ulykke),
+      antallLettereSkadde: finnAntallLettereSkadde(ulykke),
       alvorlighetsgrad: finnAlvorlighetsgrad(ulykke),
     };
   });

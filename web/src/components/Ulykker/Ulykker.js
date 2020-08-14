@@ -63,14 +63,14 @@ function Ulykker() {
           />
         ))}
 
-      {/* {aktivUlykke && (
+      {aktivUlykke && (
         <UlykkePopup
           aktivUlykke={aktivUlykke}
           onClose={() => {
             setAktivUlykke(null);
           }}
         ></UlykkePopup>
-      )} */}
+      )}
     </MarkerClusterGroup>
   );
 }
