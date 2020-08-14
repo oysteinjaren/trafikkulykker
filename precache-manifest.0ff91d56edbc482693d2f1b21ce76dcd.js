@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "10a1ab39d11dfc8579743aee12601267",
+    "revision": "990add4d3c2245c973a6512abca76b8e",
     "url": "/trafikkulykker/index.html"
   },
   {
-    "revision": "c3e3212c0a45d38cbda1",
+    "revision": "109cc60bf5f9afa591da",
     "url": "/trafikkulykker/static/css/main.3bac5fa9.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/trafikkulykker/static/js/2.3136c098.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "c3e3212c0a45d38cbda1",
-    "url": "/trafikkulykker/static/js/main.d3b57f9f.chunk.js"
+    "revision": "109cc60bf5f9afa591da",
+    "url": "/trafikkulykker/static/js/main.696b8c9a.chunk.js"
   },
   {
     "revision": "daf7e23f4cd40023bb80",
