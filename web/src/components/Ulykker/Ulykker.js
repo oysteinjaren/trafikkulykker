@@ -3,7 +3,6 @@ import { Marker } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import { useLeafletBounds } from "use-leaflet";
 import { Icon } from "leaflet";
-import axios from "axios";
 import UlykkePopup from "../UlykkePopup";
 import hentUlykker from "./hentUlykker";
 
