@@ -27,6 +27,12 @@ function UlykkePopup(props) {
     return antall === 1 ? "1 lettere skadd" : `${antall} lettere skadde`;
   }
 
+  function uhellKategori() {
+    return aktivUlykke.uhellKategori === "Mc ulykke"
+      ? "MC-ulykke"
+      : aktivUlykke.uhellKategori;
+  }
+
   return (
     <Popup
       position={[aktivUlykke.koordinater.lat, aktivUlykke.koordinater.lon]}
@@ -34,7 +40,7 @@ function UlykkePopup(props) {
       autoPan={false}
     >
       <h2>
-        {aktivUlykke.uhellKategori} ({aktivUlykke.ulykkesdato})
+        {uhellKategori()} ({aktivUlykke.ulykkesdato})
       </h2>
       <h3>{aktivUlykke.ulykkeskode}</h3>
       <span>{involverteEnheter(aktivUlykke.antallEnheter)}</span>
