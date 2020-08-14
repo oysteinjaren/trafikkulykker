@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/trafikkulyker/static/css/main.3bac5fa9.chunk.css",
+    "main.js": "/trafikkulyker/static/js/main.149c15df.chunk.js",
+    "main.js.map": "/trafikkulyker/static/js/main.149c15df.chunk.js.map",
+    "runtime-main.js": "/trafikkulyker/static/js/runtime-main.f068d7ba.js",
+    "runtime-main.js.map": "/trafikkulyker/static/js/runtime-main.f068d7ba.js.map",
+    "static/js/2.ddfec39b.chunk.js": "/trafikkulyker/static/js/2.ddfec39b.chunk.js",
+    "static/js/2.ddfec39b.chunk.js.map": "/trafikkulyker/static/js/2.ddfec39b.chunk.js.map",
+    "index.html": "/trafikkulyker/index.html",
+    "precache-manifest.6bb0f03d1331e7bc471c85af5fa9cb31.js": "/trafikkulyker/precache-manifest.6bb0f03d1331e7bc471c85af5fa9cb31.js",
+    "service-worker.js": "/trafikkulyker/service-worker.js",
+    "static/css/main.3bac5fa9.chunk.css.map": "/trafikkulyker/static/css/main.3bac5fa9.chunk.css.map",
+    "static/js/2.ddfec39b.chunk.js.LICENSE.txt": "/trafikkulyker/static/js/2.ddfec39b.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f068d7ba.js",
+    "static/js/2.ddfec39b.chunk.js",
+    "static/css/main.3bac5fa9.chunk.css",
+    "static/js/main.149c15df.chunk.js"
+  ]
+}
