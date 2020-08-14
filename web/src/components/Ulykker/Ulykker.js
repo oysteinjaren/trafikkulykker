@@ -14,7 +14,10 @@ function Ulykker() {
   const [aktivUlykke, setAktivUlykke] = React.useState(null);
 
   useEffect(() => {
-    hentUlykker(vest, sør, øst, nord);
+    (async () => {
+      const hentedeUlykker = await hentUlykker(vest, sør, øst, nord);
+      setUlykker(hentedeUlykker.filter((ulykke) => ulykke.koordinater != null));
+    })();
   }, [vest, sør, øst, nord]);
 
   function hentUlykkeIkon(alvorlighetsgrad) {
@@ -60,14 +63,14 @@ function Ulykker() {
           />
         ))}
 
-      {aktivUlykke && (
+      {/* {aktivUlykke && (
         <UlykkePopup
           aktivUlykke={aktivUlykke}
           onClose={() => {
             setAktivUlykke(null);
           }}
         ></UlykkePopup>
-      )}
+      )} */}
     </MarkerClusterGroup>
   );
 }

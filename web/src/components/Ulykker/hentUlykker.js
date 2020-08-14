@@ -37,7 +37,19 @@ const hentUlykker = async (vest, sør, øst, nord) => {
   console.log(`Hentet ${returnerteUlykker.length} ulykker`);
   console.log(returnerteUlykker);
 
-  //setUlykker(response.data.filter((ulykke) => ulykke.koordinater != null));
+  return returnerteUlykker.map((ulykke) => {
+    const wkt = ulykke.geometri.wkt;
+    const split = wkt.split(/[()]/);
+    const koordinaterStrings = split[1].split(" ");
+    var koordinater = {
+      lat: parseFloat(koordinaterStrings[0]),
+      lon: parseFloat(koordinaterStrings[1]),
+    };
+    return {
+      id: ulykke.id,
+      koordinater: koordinater,
+    };
+  });
 };
 
 export default hentUlykker;
