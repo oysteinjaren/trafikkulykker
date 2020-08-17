@@ -18,6 +18,7 @@ Applikasjonen er under utvikling, og nye funksjoner vil legges til fortløpende.
  - Kartlag som viser veier, med veisegmenter fargekodet etter hvor mange ulykker som har skjedd der
  - Som over, men fargekodet etter antall ulykker delt på trafikkmengde. Kan kanskje brukes til å finne veisegmenter som er overrepresentert på ulykkesstatistikken ift. trafikkmengden.
   - Vise data fra flere år tilbake, og gjøre det mulig å se utviklingen fra år til år
+  - En statistikkside (uten kart) som gir en enkel oversikt over hovedfunnene i [Dybdeanalyser av dødsulykker i vegtrafikken](https://www.vegvesen.no/fag/fokusomrader/trafikksikkerhet/ulykkesdata/analyse+av+dodsulykker+uag)
  
 
 
