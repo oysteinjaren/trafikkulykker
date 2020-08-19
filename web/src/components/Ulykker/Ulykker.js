@@ -4,7 +4,7 @@ import MarkerClusterGroup from "react-leaflet-markercluster";
 import { useLeafletBounds } from "use-leaflet";
 import { Icon } from "leaflet";
 import UlykkePopup from "../UlykkePopup";
-import hentUlykker from "./hentUlykker";
+import hentUlykker from "../../api/hentUlykker";
 
 function Ulykker() {
   const [[sør, vest], [nord, øst]] = useLeafletBounds();
