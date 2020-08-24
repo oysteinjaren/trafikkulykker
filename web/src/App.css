@@ -2,3 +2,15 @@
   width: 100%;
   height: 100vh;
 }
+
+.marker-cluster-custom {
+  background: #481cc4;
+  border: 2px solid #f6f6f6;
+  border-radius: 50%;
+  color: #f6f6f6;
+  display: flex;
+}
+
+.marker-cluster-custom span {
+  margin: auto;
+}

@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from "react";
+import L from "leaflet";
 import { Marker } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
-import { useLeafletBounds } from "use-leaflet";
+import { useLeafletBounds, useLeafletMap } from "use-leaflet";
 import { Icon } from "leaflet";
 import UlykkePopup from "../UlykkePopup";
 import hentUlykker from "../../api/hentUlykker";
 
 function Ulykker() {
   const [[sør, vest], [nord, øst]] = useLeafletBounds();
+  const map = useLeafletMap();
+
+  const kartStørrelsePikslerY = map.getSize().y;
+  const meterPerBreddegrad = 111000;
+  const KartStørrelseMeterY = (nord - sør) * meterPerBreddegrad;
+  const meterPerPiksel = KartStørrelseMeterY / kartStørrelsePikslerY;
+  console.log(`meterPerPiksel er nå ${meterPerPiksel}`);
 
   const [ulykker, setUlykker] = useState([]);
   const [aktivUlykke, setAktivUlykke] = React.useState(null);
@@ -48,8 +56,32 @@ function Ulykker() {
     });
   }
 
+  function lagAntallsavhengigClusterIkon(cluster) {
+    console.log(`Lager cluster-ikon. meterPerPiksel er ${meterPerPiksel}`);
+
+    //const antallNoder = cluster.getChildCount();
+    const antallNoder = 10;
+    const ikonSkaleringsfaktor = 100000;
+
+    // Ikonets areal skal være proporsjonalt med antall noder i clusteret.
+    // Deler på meterPerPiksel for å justere ned størrelsen på clustrene når man zoomer ut
+    // (siden clustrene da inneholder mange flere noder, og ellers ville blitt veldig store).
+    // TODO: Inne i denne funksjonen har meterPerPiksel alltid sin initielle verdi. Den oppdateres ikke selv om meterPerPiksel utenfor funksjonen gjør det. Må finne ut hvorfor
+    const ikonStørrelse = Math.max(
+      Math.sqrt((ikonSkaleringsfaktor * antallNoder) / Math.PI) /
+        meterPerPiksel,
+      0 // Ikke la ikonet bli så lite at tallet som viser antall ikke får plass
+    );
+
+    return L.divIcon({
+      html: `<span>${cluster.getChildCount()}</span>`,
+      className: "marker-cluster-custom",
+      iconSize: L.point(ikonStørrelse, ikonStørrelse, true),
+    });
+  }
+
   return (
-    <MarkerClusterGroup>
+    <MarkerClusterGroup iconCreateFunction={lagAntallsavhengigClusterIkon}>
       {ulykker &&
         ulykker.map((ulykke) => (
           <Marker
